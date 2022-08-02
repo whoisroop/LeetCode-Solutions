@@ -15,7 +15,9 @@ public:
         //         int water = mini*(j-i);
         //         maxWater = max(maxWater, water);
         //     }
-        // }
+        // } 
+
+        //Fix the max height move the other
 
         int mini=0;
         while(i<j){
