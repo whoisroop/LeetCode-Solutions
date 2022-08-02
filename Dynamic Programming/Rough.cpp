@@ -3,33 +3,36 @@ using namespace std;
 
 class Solution {
 public:
-    int removeElement(vector<int>& array, int val) {
-        int i=0, j=array.size()-1;
+    int threeSumClosest(vector<int>& array, int target) {
+        sort(array.begin(), array.end());
+        int solution;
+        int n = array.size();
         
-        while(i<=j){
-            if(array[i]==val){
-                while(j>0 && array[j]==val) j--;
-                if(j<=i) return i;
-                else{
-                    array[i] = array[i]+array[j];
-                    array[j] = array[i]-array[j];
-                    array[i] = array[i]-array[j];
+        int mini=1e8;
+        for(int iA=0; iA<=(n-3); iA++){
+            int sum=0;
+            int i=iA+1, j=n-1;
+
+            while(i<j){
+                // cout << array[iA] << " + " << array[i] << " + " << array[j] << endl;
+                sum = array[iA]+array[i]+array[j];
+
+                if(abs((target-sum))<mini){
+                    solution = sum;
+                    mini = abs(target-sum);
                 }
+                
+                if(target>sum) i++;
+                else    j--;
             }
-            
-            i++;
         }
         
-        return i;
+        return solution;
     }
 };
 
 int main(){
-    vector<int> array = {1};
+    vector<int> array = {1,1,1,0};
     Solution newSol;
-    cout << "LAST INDEX: " << newSol.removeElement(array, 1) << endl;
-    for(int i: array)   cout << i;
-
-
-    return 0;
+    cout << newSol.threeSumClosest(array, -100);
 }
