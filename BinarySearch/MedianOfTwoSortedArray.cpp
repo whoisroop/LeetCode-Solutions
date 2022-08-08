@@ -1,65 +1,46 @@
 #include<iostream>
 #include<vector>
-#include<map>
 using namespace std;
 
 class Solution{
 public:
-    int upperBound(vector<int> &array, int value){
-        int i=0; int j=array.size()-1;
-        int mid;
-
-        while(i<=j){
-            mid = i + (j-i)/2;
-
-            if(array[mid]<=value)   i=mid+1;
-            else    j=mid-1;
-        }
-
-        return i;
-    }
-
     double findMedian(vector<int> &arrayA, vector<int> &arrayB){
         int nA = arrayA.size();
         int nB = arrayB.size();
+        int pSize = (nA+nB+1)/2;
 
-        int i=min(arrayA[0], arrayB[0]); int j=(max(arrayA[nA-1], arrayB[nB-1]));
-        int mid;
-        int value = ((nA+nB)%2==0) ? ((nA+nB)/2) - 1 : ((nA+nB)/2);
-        if(value<i) return i;
+        int i=0; int j=min(nA, pSize);  //Min & Max Amount Of Elements
+        int pA; //Partition Size Of A   : To get a net of partition size number of elements on the left partition.
+        int x=0; int y=0;   //To Find: Middle & Middle + 1 Element
         while(i<=j){
-            mid = i + (j-i)/2;
+            pA = i + (j-i)/2;
+            
+            int leftA = (pA==0) ? INT32_MIN : arrayA[pA-1]; //No Element On Left : SAFE CASE
+            int rightA = (pA==nA) ? INT32_MAX : arrayA[pA]; //All Elements On Left : SAFE CASE
 
-            int leq = upperBound(arrayA, mid) + upperBound(arrayB, mid);
-            //Find Elements In Arrays Lesser Than Equal To Mid Value.
+            int leftB = ((pSize-pA)==0) ? INT32_MIN : arrayB[(pSize-pA) - 1];
+            int rightB = ((pSize-pA)==nB) ? INT32_MAX : arrayB[(pSize-pA)];
 
-            if(leq<=value)    i = mid+1;
-            else    j = mid-1;
+            if(leftA<=rightB && leftB<=rightA){
+                x = max(leftA, leftB);  //Last Element Of First Part
+                y = min(rightA, rightB);    //First Element Of Right Part
+                break;
+            }
+
+            if(leftA>rightB)    j = pA-1;
+            if(leftB>rightA)    i = pA+1;
         }
 
-        int x = i;
-        int y = x;
-        if((nA+nB)%2 ==0 ){
-            // (j = min(upperBound(arrayA, x), upperBound(arrayB, x)));
-            int a = upperBound(arrayA, x);
-            int b = upperBound(arrayB, x);
-            if(a<nA && b==nB)   y = arrayA[a];
-            if(b<nB && a==nA)   y = arrayB[b];
-
-            if(a==nA && b==nB)   y = x;
-            if(a<nA && b<nB)    y = min(arrayA[a], arrayB[b]);
-        }
-
-        cout << (x+y)/2.0;
-        return (x+y)/2.0;
+        if((nA+nB)%2!=0)    return x;
+        else    return (x+y)/2.0;
     }
 
 };
 
 int main(){
-    vector<int> arrayA = {0,0};
-    vector<int> arrayB = {0,0};
+    vector<int> arrayA = {1,7};
+    vector<int> arrayB = {3,6};
     Solution median;
-    median.findMedian(arrayA, arrayB);
+    cout << median.findMedian(arrayA, arrayB);
     return 0;
 }
