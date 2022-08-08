@@ -5,6 +5,11 @@ using namespace std;
 class Solution{
 public:
     double findMedian(vector<int> &arrayA, vector<int> &arrayB){
+        //Make sure the size of first array is smaller.
+        //If arrayA have 10 element & arrayB have 1 elements: pSize = 6.
+        //If we take 0 elements from array A we do not have (6-1) elements in arrayB! Run Time Error!
+        if(arrayA.size()>arrayB.size()) return findMedian(arrayB, arrayA);
+
         int nA = arrayA.size();
         int nB = arrayB.size();
         int pSize = (nA+nB+1)/2;
@@ -18,8 +23,10 @@ public:
             int leftA = (pA==0) ? INT32_MIN : arrayA[pA-1]; //No Element On Left : SAFE CASE
             int rightA = (pA==nA) ? INT32_MAX : arrayA[pA]; //All Elements On Left : SAFE CASE
 
-            int leftB = ((pSize-pA)==0) ? INT32_MIN : arrayB[(pSize-pA) - 1];
-            int rightB = ((pSize-pA)==nB) ? INT32_MAX : arrayB[(pSize-pA)];
+            int pB = (pSize-pA);
+
+            int leftB = (pB==0) ? INT32_MIN : arrayB[pB - 1];
+            int rightB = (pB==nB) ? INT32_MAX : arrayB[pB];
 
             if(leftA<=rightB && leftB<=rightA){
                 x = max(leftA, leftB);  //Last Element Of First Part
@@ -38,8 +45,8 @@ public:
 };
 
 int main(){
-    vector<int> arrayA = {1,7};
-    vector<int> arrayB = {3,6};
+    vector<int> arrayA = {2};
+    vector<int> arrayB = {};
     Solution median;
     cout << median.findMedian(arrayA, arrayB);
     return 0;
