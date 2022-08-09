@@ -8,17 +8,19 @@ private:
         int n = bloom.size();
         int count=0;
 
-        for(int i=0; i<n; i++){
+        for(int i=0; i<n-nF; i++){
             bool isMade = false;
 
             for(int j=0; j<nF; j++){
-                if(bloom[i+j]>maxDays){ i=(i+j)+1; isMade=false; break; }   
-                else if(j==(nF-1)){ i=(i+j)+1; isMade=true; }
+                cout << "I: " << i << " J: " << j << " | " << bloom[i+j] << " <= " << maxDays << " = " << count << endl; 
+                if(bloom[i+j]>maxDays){ i=(i+j); isMade=false; break; } 
+                else if(j==(nF-1)){ i=(i+j); isMade=true; }
             }
 
             if(isMade)  count++;  
         }
 
+        cout << "MIDPOINT: " << maxDays << " BOUQUETS: " << count << endl;
         return (count>=bouquets);
     }
 public:
