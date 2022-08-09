@@ -8,7 +8,7 @@ private:
         int n = bloom.size();
         int count=0;
 
-        for(int i=0; i<n-nF; i++){
+        for(int i=0; i<(n-nF+1); i++){
             bool isMade = false;
 
             for(int j=0; j<nF; j++){
