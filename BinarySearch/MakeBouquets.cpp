@@ -12,7 +12,7 @@ private:
             bool isMade = false;
 
             for(int j=0; j<nF; j++){
-                cout << "I: " << i << " J: " << j << " | " << bloom[i+j] << " <= " << maxDays << " = " << count << endl; 
+                // cout << "I: " << i << " J: " << j << " | " << bloom[i+j] << " <= " << maxDays << " = " << count << endl; 
                 if(bloom[i+j]>maxDays){ i=(i+j); isMade=false; break; } 
                 else if(j==(nF-1)){ i=(i+j); isMade=true; }
             }
@@ -20,7 +20,7 @@ private:
             if(isMade)  count++;  
         }
 
-        cout << "MIDPOINT: " << maxDays << " BOUQUETS: " << count << endl;
+        // cout << "MIDPOINT: " << maxDays << " BOUQUETS: " << count << endl;
         return (count>=bouquets);
     }
 public:
