@@ -11,7 +11,8 @@
 #include<vector>
 using namespace std;
 
-//The question is similar to binary search except the fact that instead of middle the element might be present in middle-1, middle or middle+1. However, all the elements left of middle will be smaller than middle & all the elements right of middle will be greater than middle: Binary Search.
+//The question is similar to binary search except the fact that instead of middle the element might be present in middle-1, middle or middle+1. 
+//However, all the elements left of middle will be smaller than (middle, middle-1, middle+1) & all the elements right of middle will be greater than (middle, middle-1, middle+1): Binary Search.
 
 class Solution{
 public:
