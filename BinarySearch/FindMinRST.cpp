@@ -11,6 +11,11 @@ public:
         int mini = INT32_MAX;
         while(i<=j){
             midpoint = i + (j-i)/2;
+
+            if(array[i]==array[j]){ //Duplicates Allowed: PART II
+                mini = min(mini, array[i]);
+                i++; j--;   continue;
+            }
             
             //Save Minimum In Sorted Part & Continue Search In Other Part. 
             if(array[i]<=array[midpoint]){  //Left Part Sorted
