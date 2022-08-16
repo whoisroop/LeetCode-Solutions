@@ -1,44 +1,39 @@
 #include<iostream>
 #include<vector>
-#include<queue>
+#include<list>
 using namespace std;
 
 class Solution{
 public:
     vector<int> findMax(vector<int> &array, int window){
         int i=0; int j=0;
-        queue<int> q;
+        //Use deque<int> for faster execution: Same function as vector/list & faster access to elements.
+        list<int> l;    
         vector<int> maxi;
 
         int li = array.size()-1;
         while(j<=li){
             if((j-i+1)<window){
-                if(q.empty()==true) q.push(array[j]);
+                if(l.empty()==true) l.push_back(array[j]);
                 else{
                     //If in the given window we have another greater element on right, discard the previous elements & start storing from that element onwards.
-                    if(q.front()<array[j]){ 
-                        while(q.empty()!=true) q.pop();
-                        q.push(array[j]);
-                    }
-                    else q.push(array[j]);
+                    while(l.empty()!=true && l.back()<array[j]) l.pop_back();
+                    l.push_back(array[j]);
                 }
 
                 j++;
             }
             else{
-                if(q.empty()==true) q.push(array[j]);
+                if(l.empty()==true) l.push_back(array[j]);
                 else{
-                    if(q.front()<array[j]){ 
-                        while(q.empty()!=true) q.pop();
-                        q.push(array[j]);
-                    }
-                    else q.push(array[j]);
+                    while(l.empty()!=true && l.back()<array[j]) l.pop_back();
+                    l.push_back(array[j]);
                 }
 
-                maxi.push_back(q.front());
+                maxi.push_back(l.front());
                 
                 //Reset the first element for next window
-                if(q.front()==array[i]) q.pop();
+                if(l.front()==array[i]) l.pop_front();
                 i++; j++;
             }
         }
@@ -49,7 +44,7 @@ public:
 };
 
 int main(){
-    vector<int> array = {1,3,-1,-3,5,3,6,7};
+    vector<int> array = {1,3,1,2,0,5};
     Solution find;
     find.findMax(array, 3);
     
