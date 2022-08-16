@@ -11,29 +11,27 @@ public:
         int sum=0;
         int mini = INT32_MAX;
         int n = array.size();
+        bool changeJ = true;
         while(j<n){
-            cout << i << " | " << j << " - " << mini << endl;
-            if(i>j){ sum -= array[i]; i=j+1; j=j+1; }
+            if(i>j){ j=i; continue; }
+            
+            if(changeJ) sum += array[j];
 
-            sum += array[j];
-
-            if(sum==target){ 
-                cout << "TARGET" << endl;
+            if(sum>=target){
                 mini = min(mini, (j-i+1));
-
-                sum -= array[i];
-                i++; j++;
+                cout << "HIT: " << i << " " << j << " | SUM: " << sum << " - " << j-i+1 << endl;
+                //As the sum is greater remove the first element of window.
+                sum = sum - array[i];
+                cout << "SUM: " << sum << endl;
+                i++; changeJ = false;
             }
-            else if(sum<target){
-                j++;
-            }
-            else{   //sum>target
-                sum -= array[i];
-                i++;
+            else{   //Sum < Target
+                j++; changeJ = true;
             }
         }
 
-        return mini;
+        if(mini == INT32_MAX)    return 0; //No Solution
+        else return mini;
     }
 };
 
