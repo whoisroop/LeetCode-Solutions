@@ -25,7 +25,7 @@ public:
                 
                 j++;
             }
-            else if(mpp.size()==k){
+            else if(mpp.size()<=k){
                 maxi = max(maxi, (j-i+1));
                 j++;
             }
