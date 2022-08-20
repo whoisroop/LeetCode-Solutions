@@ -87,7 +87,7 @@ public:
         return postorder;
     }
 
-    //Keep in mind the axuliary stack space during recursion & use a node pointer to traverse and push the required node into the stack. 
+    //Keep in mind the auxliary stack space during recursion & use a node pointer to traverse and push the required node into the stack. 
     vector<int> inOrder(){
         TreeNode * root = createTree();
         vector<int> inorder;
@@ -103,6 +103,8 @@ public:
                 stk.push(node); 
                 node = node->left;
             }
+            //When pointer is null: the topmost element of the stack is the parent of its current left node (NULL).
+            //Hence, pop the parent & push its right node.
             else{
                 //Node == Null: The left subtree is completed.
                 if(stk.empty()==true)   break;
