@@ -2,27 +2,25 @@
 #include<math.h>
 using namespace std;
 
+//Only one bit is set followed by even number of zeroes.
 bool isPowerOfFour(int n) {
-    if(n==1)    return true;
-    if(n<4)     return false;
-    
-    if((n&(n-1)) == 0){
-        cout << "A" << endl;
-        int m = sqrt(n);
-        cout << "N - " << n << " & M - " << m << endl;
-        if((m&(m-1)) == 0){
-            return true;
+    if(n!=0 && (n&(n-1))==0){   //Only set bit is a power of two.
+        int x = n;
+        int count = 0;
+        while(x!=1){
+            x = (x>>1);
+            count++;
         }
-        else{
-            return false;
-        }
+
+        if(count%2==0) return true;
+        else return false;
     }
     
     return false;
 }
 
 int main(){
-    cout << isPowerOfFour(8) << endl;
+    cout << isPowerOfFour(32) << endl;
 
     return 0;
 }
