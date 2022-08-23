@@ -4,7 +4,7 @@ using namespace std;
 
 //Only one bit is set followed by even number of zeroes.
 bool isPowerOfFour(int n) {
-    if(n!=0 && (n&(n-1))==0){   //Only set bit is a power of two.
+    if(n!=0 && (n&(1LL*n-1))==0){   //Only set bit is a power of two.
         int x = n;
         int count = 0;
         while(x!=1){
