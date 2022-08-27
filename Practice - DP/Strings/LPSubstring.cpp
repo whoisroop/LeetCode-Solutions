@@ -20,16 +20,7 @@ private:
 
         //Starting from the middle move towards the end to find the max possible palindromic substring of the given string p.
 
-        int start=(length-1)/2; int end=(length-1)/2;
-        if(length%2==0) end = end+1;
-
-        while(start>=0){
-            if(p[start]!=p[end]) break;
-            start--; end++;
-        }
-        start++; end--;
-
-        return p.substr(start, (end-start+1));
+        //Write Code Here
     }
 
 public:
