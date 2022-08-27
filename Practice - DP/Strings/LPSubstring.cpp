@@ -10,16 +10,26 @@ private:
         string p = "";
         while(dp[i][j]!=0){
             p += s[i-1];
+
+            dp[i][j]=-1;    //Mark Visited
             i--; j--;
         }
 
-        int ix = 0; int jx = p.size()-1;
-        while(ix<jx){
-            if(p[ix]!=p[jx]) return "";
-            ix++; jx--;
-        }
+        cout << p;
+        int length = p.size();
 
-        return p;
+        //Starting from the middle move towards the end to find the max possible palindromic substring of the given string p.
+
+        int start=(length-1)/2; int end=(length-1)/2;
+        if(length%2==0) end = end+1;
+
+        while(start>=0){
+            if(p[start]!=p[end]) break;
+            start--; end++;
+        }
+        start++; end--;
+
+        return p.substr(start, (end-start+1));
     }
 
 public:
@@ -60,20 +70,21 @@ public:
         for(int i=la; i>=0; i--){
             for(int j=lb; j>=0; j--){
                 if(dp[i][j]>0){
-                    string x = checkPalindrome(i, j, dp, sa);
-                    if(x.size()>maxi){
-                        maxi = x.size();
-                        palindrome = x;
+                    string p = checkPalindrome(i, j, dp, sa);
+                    if(p.size()>maxi){
+                        maxi = p.size();
+                        palindrome = p;
                     }
                 } 
             }
         }
+
         return palindrome;
     }
 };
 
 int main(){
-    string sa = "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa";
+    string sa = "aacxycaa";    //aacdefcaa aacfedcaa
     Solution find;
     cout << find.LPSubstring(sa);
     return 0;
