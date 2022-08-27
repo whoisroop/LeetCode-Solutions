@@ -20,7 +20,7 @@ public:
             longest = max( find(sa, sb, ia-1, ib, dp), find(sa, sb, ia, ib-1, dp) );
         }
 
-        return longest;
+        return dp[ia][ib] = longest;
     }
 
     //Tabulation Code:
@@ -50,6 +50,9 @@ public:
 
         return dp[la][lb];
     }
+
+    //DP[i][j] - Stores the length of longest common subsequence of stringA[0...i] & stringB[0...j]. 
+    //Hence by comparing the DP[i-1][j-1] with DP[i][j] (DP[i][j] = DP[i-1][j-1] + 1) & checking if stringA[i]==stringB[j] we can conclude if the ith or jth character are a part of the LCS.
 
     //Print LCS Code:
     string printLCS(string sa, string sb){
