@@ -34,16 +34,13 @@ public:
             }
         }
 
-        cout << "DP";
-        for(int i=0; i<=sum; i++) cout << dp[n-1][i] << " ";
-
         //DP[n-1][] --> Indicates all the achievable values of the subsets that can be formed.
 
         int minDifference=INT32_MAX;
         int midpoint = (sum/2); if(sum%2!=0) midpoint++;
         for(int i=0; i<=midpoint; i++){
             if(dp[n-1][i]==1){
-                cout << i << " " << (sum-i) << endl;
+                // cout << i << " " << (sum-i) << endl;
                 minDifference = min(minDifference, abs(i - (sum-i)));
             }        
         }
