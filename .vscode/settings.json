@@ -9,6 +9,7 @@
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "string_view": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "random": "cpp"
     }
 }
