@@ -10,6 +10,11 @@
         "unordered_set": "cpp",
         "string_view": "cpp",
         "bitset": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp",
+        "regex": "cpp",
+        "utility": "cpp",
+        "valarray": "cpp"
     }
 }
