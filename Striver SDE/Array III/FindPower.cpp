@@ -3,6 +3,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// 2^10 --> 2^5 * 2^5
+// 2^7 --> 2^3 * 2^3 * 2
+
 class Solution {
 public:
     double getPower(double &x, int n){
