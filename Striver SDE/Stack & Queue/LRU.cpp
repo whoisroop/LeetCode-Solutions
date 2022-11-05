@@ -42,16 +42,16 @@ public:
     int maxsize; int count;
     
     LRUCache(int capacity) {
-        maxsize = capacity;
         start = new Node(-1, -1, NULL, end);
         end = new Node(-1, -1, start, NULL);
+        maxsize = capacity; count = 0;
     }
     
     void put(int key, int value) {
         if(pmap.find(key) != pmap.end()){ remove(pmap[key]); count--; } //If already present remove.
 
-        pmap[key] = start->n;
         insert(start, key, value);
+        pmap[key] = start->n;
         count++;
         
         if(count > maxsize){
