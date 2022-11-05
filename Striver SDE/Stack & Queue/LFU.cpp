@@ -40,6 +40,17 @@ private:
     }
 
     void shift(Node * i){
+        // Helps to avoid TLE: Worst case tackle.
+        if(i->counter >= start->n->counter){
+            i->p->n = i->n;
+            i->n->p = i->p;
+            
+            i->p = start; i->n = start->n;
+            i->p->n = i;
+            i->n->p = i;
+            return;
+        }
+
         Node * px = i;
         int countValue = i->counter;
         while(px!=start && countValue >= px->p->counter){
