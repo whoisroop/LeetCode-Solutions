@@ -42,12 +42,12 @@ private:
     void shift(Node * i){
         Node * px = i;
         int countValue = i->counter;
-        while(px!=start && countValue == px->p->counter){
+        while(px!=start && countValue >= px->p->counter){
             px = px->p;
         }
         if(px == i) return;
 
-        px = px->p;
+        if(px!=start) px = px->p;   //If start counter was not INT MAX
         //Remove i:
         i->p->n = i->n;
         i->n->p = i->p;
@@ -71,7 +71,7 @@ public:
 
         start->n = end;
         end->p = start;
-        start->counter = -1; end->counter = -1;
+        start->counter = INT32_MAX; end->counter = INT32_MIN;
     }
     
     int get(int key) {
@@ -89,6 +89,7 @@ public:
             shift(pmap[key]);
         }
         else{
+            if(maxsize == 0) return;
             if(count == maxsize){
                 pmap.erase(pmap.find(end->p->key));
                 remove(end->p);
