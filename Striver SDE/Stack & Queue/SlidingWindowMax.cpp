@@ -31,19 +31,28 @@ using namespace std;
 class Solution{
 public:
     deque<int> q;   //Double Ended Queue
-    void push(int x){
-        while(q.front() <= x) q.pop_front();
-        q.push_back(x);
+    void push(int value){
+        while(!q.empty() && q.front() < value) q.pop_front();
+        q.push_back(value);
     }
 
     vector<int> slidingWindow(vector<int> &A, int wsize){
         int n = A.size();
         int i=0, j=0; 
+        vector<int> windowMax;
 
         while(j<n){
-            if((j-i+1) < wsize){
-                q.push_back(A[j]);
+            push(A[j]);
+
+            if((j-i+1) == wsize){
+                windowMax.push_back(q.front());
+
+                if(q.front() == A[i]) q.pop_front();
+                i++;
             }
+            j++;
         }
+
+        return windowMax;
     }
 };
