@@ -7,6 +7,8 @@
 // departure[] = {0910, 1200, 1120, 1130, 1900, 2000}
 // Output: 3
 
+// Refer Book - Guide To Cp.
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -17,33 +19,21 @@ bool comparator(pair<int, pair<int, int>> &a, pair<int, pair<int, int>> &b){
 class Solution{
 public:
     int findPlatform(int arrival[], int departure[], int n){
-    	vector<pair<int, pair<int, int>>> train(n);    //<Index, <Arrival, Departure>>
-        for(int i=0; i<n; i++){
-            train[i] = {i, {arrival[i], departure[i]}};
-        }
-
-        sort(train.begin(), train.end(), comparator);
-
-        int l = n; int platform = 0;
-        while(l!=0){
-            int pDepart = -1;
-            for(int i=0; i<n; i++){
-                int &arrive = train[i].second.first;
-                int &depart = train[i].second.second;
-                if(arrive == -1 || depart == -1) continue;  //Already Alloted Platform.
-
-                if(arrive > pDepart){
-                    cout << arrive << " - " << depart << endl;
-                    l--; pDepart = depart;
-                    arrive = -1; depart = -1;   //Mark as alloted.
-                }
-            }
-
-            platform++;
-            cout << "* * * * *" << endl;
-        }
-
-        return platform;
+    	sort(arrival, arrival + n);
+    	sort(departure, departure + n);
+    	int overlap = 0;
+    	int maxtrain = 0;
+    	
+    	int i=0, j=0;
+    	while(i<n){
+    	    while(departure[j] < arrival[i]){
+    	        overlap--; j++;
+    	    }
+    	    overlap++; i++;
+    	    maxtrain = max(maxtrain, overlap);
+    	}
+    	
+    	return maxtrain;
     }
 };
 
