@@ -9,6 +9,9 @@
 
 // Refer Book - Guide To Cp.
 
+// We need to find the maximum number of overlapping i.e. the max needed platforms = max number of train encountered at a moment.
+// Sweep Line Algorithm: Sort the incoming time & out going time - Add one for every incoming & Subtract one for every out going while traversing through time.
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -21,7 +24,7 @@ public:
     int findPlatform(int arrival[], int departure[], int n){
     	sort(arrival, arrival + n);
     	sort(departure, departure + n);
-    	int overlap = 0;
+    	int overlap = 0;	//+1 For Each Entry & -1 Fir Each Exit
     	int maxtrain = 0;
     	
     	int i=0, j=0;
