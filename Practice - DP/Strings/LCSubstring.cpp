@@ -1,6 +1,23 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// NEWCODE:
+class SolutionNEW{
+    public:
+    int LCSS(string A, string B, int na, int nb){
+        vector<vector<int>> DP((na + 1), vector<int>((nb + 1), 0));
+        int maxlength = 0;
+        for(int i=1; i<=na; i++){
+            for(int j=1; j<=nb; j++){
+                if(A[i - 1] == B[j - 1]) DP[i][j] = 1 + DP[i - 1][j - 1];
+                maxlength = max(maxlength, DP[i][j]);
+            }
+        }
+        
+        return maxlength;
+    }
+};
+
 class Solution{
 public:
     //The Recursion DP & Tabulation DP table will be different. 

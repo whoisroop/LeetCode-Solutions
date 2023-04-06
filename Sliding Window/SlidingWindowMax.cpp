@@ -43,6 +43,28 @@ public:
     }
 };
 
+// class Solution
+// {
+//   public:
+//     //Function to find maximum of each subarray of size k.
+//     vector <int> max_of_subarrays(int *A, int n, int k)
+//     {
+//         map<int, int> fmap;
+//         vector<int> maxw;
+//         int i=0, j=0;
+//         while(j<n){
+//             fmap[A[j]] += 1; 
+//             if((j-i+1) < k){ j+=1; continue; }
+            
+//             maxw.push_back(fmap.rbegin()->first);
+//             fmap[A[i]] -= 1; if(fmap[A[i]] == 0) fmap.erase(A[i]);
+//             i += 1; j +=1;
+//         }
+        
+//         return maxw;
+//     }
+// };
+
 int main(){
     vector<int> array = {1,3,1,2,0,5};
     Solution find;
