@@ -4,10 +4,11 @@ using namespace std;
 class Solution{
 public:
     vector<int> dataLocation(vector<int> location, vector<int> from, vector<int> to){
+        int n = from.size();
+        if(n == 0) return location;
         unordered_set<int> iset;
         for(int &i: location) iset.insert(i);
 
-        int n = from.size();
         for(int i=0; i<n; i++){
             iset.erase(from[i]);
             iset.insert(to[i]);
