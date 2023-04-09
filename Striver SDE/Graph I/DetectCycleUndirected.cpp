@@ -55,6 +55,14 @@ public:
     }
 };
 
+// Alternate:
+// Calculate number of edges: If edges >= vertex, cycle exists. E = V - 1.
+// int edges = 0;
+// for(auto i: A) edges += i.size();
+// cout << "\nEdges: " << (edges/2) << endl;
+// edges /= 2;
+// return (edges >= A.size() - 1);
+
 int main(){
     
     return 0;
