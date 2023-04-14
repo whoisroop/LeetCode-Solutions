@@ -1,0 +1,53 @@
+Graph Algorithms:
+
+The shortest path algorithms :- Dijkshtra's BellmanFord Floyd-Warshall
+
+Dijkshtra's: (Representation - Adjacency List)
+* Single source shortest path algorithm, uses the concept of BFS traversal to traverse graph from the source vertex. The edges are weighted, use a (priority queue) minheap instead of a queue to store <distance, node>, visiting the neighboring edges in the increasing order of distance, shortest ones visited first.
+* If the vertex is visited again & the updated distance to the vertex is smaller, add the node to priority queue and perform the traversal (like a bfs traversal again from the node, multisource traversal), updating the distance along the way, a new path with shorter distance is found which might update other paths to connecting nodes.
+* If the vertex is visited again & the distance is more than the existing distance to the node, pop the node, no further traversal or branching out from the vertex is required as it is already done once with minimum weight or distance. 
+
+DRAWBACK: No negative edges allowed.
+
+BellmanFord's: (Representation - Edge List)
+* Single source shortest path algorithm, negative cycles are allowed.
+* For a graph with V vertex, let the first vertex be 0 & last vertex be V-1. Total vertex: V. 
+* Max edges to exist between the first & the last is when all the other nodes are in between of the first & last, hence it'll consist of V - 1 edges. Which proves, in V - 1 iterations the value will propagate to its farthest node, guranteed.
+* Doesn't matter in which order we process the edges. Random order each time will also do.
+
+DRAWBACK: No negative cycles allowed.
+Running the BellmanFord for one more iterations, if it updates the distance:- A negative cycle is present.
+
+Floyd-Warshall's: (Representation - Matrix)
+* Multisource shortest path algorithm, finds the distance from every single vertex to all the other vertex.
+* The concept of junction: Breaking down the path with the help of a junction.
+* Edge List: (1,2, W: 1) (2,3, W:1) (2,0, W:5) (3,0, W:2)
+
+          3
+        / |
+1 -> 2    |
+        \ v
+          0
+
+* Lets focus on a single path for understanding: The path from 1 to 0 can be divided into multiple paths:
+* Via 0, Via 1 no update on any paths lengths or distance.
+* Initial update will be via 2: 1 to 3 will be 1->2 + 2->3 = 2, also 1 to 0 will be 1->2 + 2->0 = 6.
+* Next update: Via 3
+* 1 to 0 via 3: 1->3 + 3->0 = 2 + 2 = 4 New Minimum!    (1->3 was calculated via 2)
+* Here, the path 1 to 0 was broken down into 1 to 3 and 3 to 0.
+* 1 to 3 joining at junction 2 & 1 to 0 joining at junction 3.
+
+* If we switch order in which the vertex are processed:
+* Edge List: (1,2, W: 1) (3,2, W:1) (3,0, W:5) (2,0, W:2)
+* The weights are same, just the vertex are interchanged so as the processing order is changed.
+
+          2
+        / |
+1 -> 3    |
+        \ v
+          0
+
+* Here, the via 2 will be calculated first giving us 3 to 0 via 2 as the junctions.
+* Then, the via 3 will give 1->3 + 3->0 (calculated using 2).
+* The paths can be divided into segments and can processed in anyorder, but the joining them by junctions order will yeild the same path.
+* 3 to 0 joining at junction 2 & 1 to 0 joining at junction 3.
