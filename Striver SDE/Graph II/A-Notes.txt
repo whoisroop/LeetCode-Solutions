@@ -21,7 +21,7 @@ Running the BellmanFord for one more iterations, if it updates the distance:- A 
 Floyd-Warshall's: (Representation - Matrix)
 * Multisource shortest path algorithm, finds the distance from every single vertex to all the other vertex.
 * The concept of junction: Breaking down the path with the help of a junction.
-* Edge List: (1,2, W: 1) (2,3, W:1) (2,0, W:5) (3,0, W:2)
+* Edge List: (1,2, W:1) (2,3, W:1) (2,0, W:5) (3,0, W:2)
 
           3
         / |
