@@ -12,36 +12,79 @@ public:
     vector<vector<int>> threeSum(vector<int> &A){
         sort(A.begin(), A.end());
         int N = A.size();
-        set<vector<int>> result;
+        vector<vector<int>> solution;
 
         // A + B + C = 0
         // B + C = -A
         // All Triplets
         for(int i=0; i<N; i++){
+            if(i != 0 && A[i] == A[i-1]) continue;
             vector<int> triplet(3, 0);
 
             int tsum = -1*A[i];
-            unordered_map<int, int> fmap;
-            for(int j=i+1; j<N; j++){
-                int search = tsum - A[j];
-                if(fmap.count(search) != 0){
-                    fmap[search] -= 1;
-                    if(fmap[search] == 0) fmap.erase(search);
+            int p = i+1, q = N-1;
+            while(p<q){
+                int sum = A[p] + A[q];
+                if(sum == tsum){
+                    // No such pair should repeat:
+                    while(p<q && A[p] == A[p+1]) p += 1;    // Skip the duplicates.
+                    while(p<q && A[q] == A[q-1]) q -= 1;
 
+                    // We're at the edge of values ( 1 (p: 1) (q: 3) 3 3):
                     triplet[0] = A[i];
-                    triplet[1] = search;
-                    triplet[2] = A[j];
-                    for(int i: triplet) cout << i << " ";
-                    cout << endl;
-                    result.insert(triplet);
+                    triplet[1] = A[p];
+                    triplet[2] = A[q];
+
+                    solution.push_back(triplet);
+                    p += 1; q -= 1;
                 }
-                else{ fmap[A[j]] += 1; }
+                else if(sum < tsum) p += 1;
+                else q -= 1;
             }
         }
 
-        vector<vector<int>> solution(result.begin(), result.end());
+        cout << "SOLUTION: " << endl;
+        for(auto i: solution){
+            for(int j: i) cout << j << " ";
+            cout << endl;
+        }
+
         return solution;
     }
+
+    // vector<vector<int>> threeSum(vector<int> &A){
+    //     sort(A.begin(), A.end());
+    //     int N = A.size();
+    //     set<vector<int>> result;
+
+    //     // A + B + C = 0
+    //     // B + C = -A
+    //     // All Triplets
+    //     for(int i=0; i<N; i++){
+    //         vector<int> triplet(3, 0);
+
+    //         int tsum = -1*A[i];
+    //         unordered_map<int, int> fmap;
+    //         for(int j=i+1; j<N; j++){
+    //             int search = tsum - A[j];
+    //             if(fmap.count(search) != 0){
+    //                 fmap[search] -= 1;
+    //                 if(fmap[search] == 0) fmap.erase(search);
+
+    //                 triplet[0] = A[i];
+    //                 triplet[1] = search;
+    //                 triplet[2] = A[j];
+    //                 for(int i: triplet) cout << i << " ";
+    //                 cout << endl;
+    //                 result.insert(triplet);
+    //             }
+    //             else{ fmap[A[j]] += 1; }
+    //         }
+    //     }
+
+    //     vector<vector<int>> solution(result.begin(), result.end());
+    //     return solution;
+    // }
 };
 
 int main(){
