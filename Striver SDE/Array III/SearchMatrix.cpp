@@ -7,6 +7,26 @@
 #include<vector>
 using namespace std;
 
+class Easy{
+    public:
+    bool search(vector<vector<int>> A, int n, int m, int value) {
+        // Approach: Start from top right:
+        // All the elements down: Columns will be greater.
+        // All the element left: Row will be smaller.
+        // Make movements as per the requirements: LEFT OR DOWN
+        
+        int i=0, j=m-1;
+        while(i<n && j>=0){
+            if(A[i][j] == value) return true;
+            
+            if(A[i][j] < value) i += 1;
+            else j -= 1;
+        }
+    
+        return false;
+    }
+};
+
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {

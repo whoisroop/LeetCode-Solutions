@@ -2,6 +2,53 @@
 #include<vector>
 using namespace std;
 
+class Solution{   
+public:
+    int upperbound(vector<int> &A, int value){
+        int i=0, j=A.size()-1;
+        int index = 0;
+        while(i<=j){
+            int midpoint = (i + (j-i)/2);
+            
+            if(A[midpoint] <= value){ i = midpoint + 1; }
+            else j = midpoint - 1;
+        }
+        
+        return i;
+    }
+    
+    // Count Values Less Than:
+    int countV(vector<vector<int>> &A, int value){
+        int N = A.size();
+        int counter = 0;
+        for(int i=0; i<N; i++) counter += upperbound(A[i], value);
+        
+        return counter;
+    }
+    
+    int median(vector<vector<int>> &A, int R, int C){
+        // MEDIAN: Generate a search space
+        // Pick a value: Values On LEFT == Values On RIGHT == ((TOTAL-1)/2)
+        // To tackle duplicate value: 1 1 2 (3) 3 3 4
+        // Value On Left = (7-1)/2 = 3
+        // Values <= 3 : 6 (Maybe)
+        // Values <= 2 : 3 (Not Possible)
+        // Move Right: MEDIAN 3.
+        int LEFT = (R*C - 1)/2;
+        
+        int i=1, j = 2001;
+        while(i<=j){
+            int midpoint = (i + (j-i)/2);
+            
+            int count = countV(A, midpoint);
+            if(count <= LEFT) i = midpoint + 1;
+            else j = midpoint - 1;
+        }
+        
+        return i;
+    }
+};
+
 class Solution{
 public:
     //Find the median of the matrix (Of all the numbers present), where each row is sorted.
