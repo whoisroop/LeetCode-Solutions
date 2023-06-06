@@ -8,6 +8,31 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void BST_PS(Node* root, Node* & P, Node* & S, int value){
+    // Predecessor:
+    Node * p = root;
+    while(p != NULL){
+        if(p->key < value){
+            P = p;
+            p = p->right;
+        }
+        else p = p->left;
+    }
+    
+    // Successor:
+    p = root;
+    while(p != NULL){
+        if(p->key > value){
+            S = p;
+            p = p->left;
+        }
+        else p = p->right;
+    }
+    
+    return;
+}
+
+// Recursive:
 void findPS(Node* root, Node*& P, Node*& S, int value){
     P = NULL; S = NULL;
     if(root == NULL) return;
