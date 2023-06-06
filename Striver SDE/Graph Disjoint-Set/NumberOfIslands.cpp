@@ -1,8 +1,9 @@
 // GFG: Number Of Islands 
 // Description: https://practice.geeksforgeeks.org/problems/number-of-islands/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-islands
 // Approach: 
+// The water turns to land & connects to the nearest neighboring islands.
 // Each cell (i,j) is represented as a node with value: (i * M + j) ; where the matrix of size N x M.
-// Now, to find the number of islands, counting ultimate parent will not work as all the cells are ultimate parent initially.
+// Now, to find the number of islands, counting ultimate parent will not work as all the cells are ultimate parent initially, be it island or water.
 // For each cell, check if a neighboring cell is an island. If an island is found connect the two nodes.
 // To track the number of islands, keep a counter.
 // Increase the counter for each island node added, when the island connects to other island, make sure the connection we're making isn't already connected. If not, make the connection and decrement the counter as the group of islands will be considered as one.
