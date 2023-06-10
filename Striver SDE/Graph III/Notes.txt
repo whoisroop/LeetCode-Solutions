@@ -1,0 +1,17 @@
+BFS : Breadth First Search can be performed taking a parameter as a reference, in normal BFS traversal the parameter is distance, the one at the closest distance gets traversed first. (Priority Queue<DISTANCE , Node *>)
+
+* Prims Minimum Spanning Tree Algorithm
+Performing BFS travesal on the basis of minimum edge length parameter, the algorithm yeilds minimum spanning tree, visiting nodes in order of the minimum edge length: Prims Minimum Spanning Tree Algorithm. 
+(Priority Queue<EDGE LENGTH , Node *>)
+
+BFS is a powerful technique, can be used for cycle detection in an undirected graph. The paths converge to a point at the same depth, when visited neighbor is found, cycle is detected.
+        1
+      /   \
+    2       3
+      \   /
+        4
+
+* Topological Sort
+Performing BFS traversal on the basis of indegree of a node yeilds topological sorting order. Push the nodes with zero indegree value into the queue, pop and decrease the indegree of all the neighbor of node. If the indegree of neighbor is zero push the value into the queue. (Queue<NODE VALUE>) We have a vector to keep track of indegree of node values in the graph.
+Topological sorting is used to detect cycles in a directed graph. The components in the loop will never have indegree value of zero, hence the topological sort will not contain all the nodes if a cycle exists.
+Simple DFS with visited condition is not sufficient to detect a loop.
