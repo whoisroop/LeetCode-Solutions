@@ -55,6 +55,30 @@ public:
     }
 };
 
+// OPTIMIZED APPROACH:
+int getcoins(int i, int j, int A[], vector<vector<int>> &DP){   //Score Of Player A:
+    // Game Theory:
+    // A: Wants to maximize its score & minimize B's score.
+    // B: Wants to maximize its score & minimize A's score.
+    // As we're storing player A's score - 
+    // A: MAXIMIZE the score of A
+    // B: MINIMIZE the score of A.
+    if(i > j) return 0;
+    
+    if(DP[i][j] != -1) return DP[i][j];
+    // PLAYER A: [i, j] : TWO OPTIONS
+    
+    // PLAYER A: ith COIN
+    // PLAYER B: [i+1, j] - Either select i+1 or j coin. Will leave A with [i+2, j] & [i+1, j-1] choices repectively.
+    int L = A[i] + min(getcoins(i+2, j, A, DP), getcoins(i+1, j-1, A, DP));
+    
+    // PLAYER A: jth COINT
+    // PLAYER B: [i, j-1] - Either select i or j-1 coin. Will leave A with [i+1, j-1] & [i, j-2] choices repectively.
+    int R = A[j] + min(getcoins(i+1, j-1, A, DP), getcoins(i, j-2, A, DP));
+    
+    return DP[i][j] = max(L, R);
+}
+
 int main(){
     vector<int> array = {1,5,2};
     Solution find;
