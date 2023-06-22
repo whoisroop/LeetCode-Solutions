@@ -3,7 +3,7 @@ using namespace std;
 
 // GCD(a, b) x LCM(a, b) = a x b
 
-// EUCLIDEAN Method:
+// EUCLIDEAN Method: https://www.youtube.com/watch?v=Jwf6ncRmhPg
 // GCD(a, b) = GCD(b, a MOD b)
 // a % b = a - Kb, K = floor(a/b) : where a - Kb is largest positive integer to get the overall a - Kb to be the smallest positive value.
 // a % b = (a - Kb) <-- is also divisible by the GCD(a, b)
