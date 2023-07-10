@@ -1,4 +1,6 @@
 // LeetCode - 239. Sliding Window Maximum.
+// GFG - https://practice.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
+
 // - Brute force
 // We can write a nested loop, the outer loop goes through each window and the inner loop finds the max within the window. This is O(N^2) time complexity.
 
@@ -29,30 +31,31 @@
 using namespace std;
 
 class Solution{
-public:
-    deque<int> q;   //Double Ended Queue
-    void push(int value){
-        while(!q.empty() && q.front() < value) q.pop_front();
+private:
+    void insert(int value, deque<int> &q){
+        while(!q.empty() && q.back() < value) q.pop_back();
         q.push_back(value);
     }
-
-    vector<int> slidingWindow(vector<int> &A, int wsize){
-        int n = A.size();
-        int i=0, j=0; 
-        vector<int> windowMax;
-
-        while(j<n){
-            push(A[j]);
-
+    
+public:
+    //Function to find maximum of each subarray of size k.
+    vector <int> max_of_subarrays(int * A, int N, int wsize){
+        deque<int> q;
+        int i=0, j=0;
+        vector<int> wmax;
+        while(j < N){
+            insert(A[j], q);
+            
             if((j-i+1) == wsize){
-                windowMax.push_back(q.front());
-
-                if(q.front() == A[i]) q.pop_front();
-                i++;
+                wmax.push_back(q.front());
+                
+                if(A[i] == q.front()) q.pop_front();
+                i+=1;
             }
-            j++;
+            
+            j+=1;
         }
-
-        return windowMax;
+        
+        return wmax;
     }
 };
