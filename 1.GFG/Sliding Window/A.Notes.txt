@@ -1,0 +1,7 @@
+* Some of the sliding window solutions are acquired when minimising the size of the window like in the problems - 
+1. Equivalent Subarray: Where when we find distinct elements in the subarray equal to total distinct elements, all the indexes from (i, j) (i, j+1) .. (i, N) yeilds the solution. When distinct elements == total distinct elements, minimize the window size & check if the condition holds, add to answer.
+2. Smallest Distinct Window
+
+* There are some weird sliding window problems like find maxlength of substring after atmost K changes, we need to find the max length of chain of same character. 
+We keep on increasing the elements until (total elements in window - max frequency in window <= K).
+When the elements to alter are greater than K, maintain the current window size & look for a solution to greater window size than current. Minimising the window size will not yeild in optimal answer.

@@ -1,0 +1,4 @@
+Special property of when to use greedy to find subset sum equal to target.
+ARRAY: A[0], A[1], ... A[i], A[i+1], ... A[n]
+WHEN: A[i] > A[0] + A[1] + ... A[i-1]
+Taking A[i] if it fits or <= target, yeilds into optimal solution, as the portion A[i] cannot be fulfiled if A[i] is not taken, the best & optimal choice is to take it, as A[0] + A[1] + .. A[i-1] even when all the elements are taken the value will be smaller than A[i], target can never be achieved.
