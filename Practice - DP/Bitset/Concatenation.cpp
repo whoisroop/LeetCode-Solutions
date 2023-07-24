@@ -13,15 +13,14 @@ using namespace std;
 class Solution{
 public:
     int concatenate(int n){
-        int value = 0; int mod = 1e9 + 7;
+        long long int value = 0;
         
-        int shift=1;
-        int jump=0;
+        int shift=0;
         for(int i=1; i<=n; i++){
+            if((i&(i-1)) == 0) shift++;
             value = ((value<<shift) | (i));
-            if((i&(i-1)) == 0) jump++;
-            shift+=jump;
         }
+
         bitset<32> x(value);
         cout << x << endl;
         cout << value;
@@ -32,6 +31,6 @@ public:
 
 int main(){
     Solution find;
-    find.concatenate(3);
+    find.concatenate(12);
     return 0;
 }

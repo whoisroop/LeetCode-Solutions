@@ -9,6 +9,59 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Aim is to find if there exists k distinct subsets each with sum equal to target with no repeating elements in different subsets.
+//In order to tackle repeating elemenets, use a visited array to keep the track of already selected elements.
+//Traverse through each element: Pick or Not Pick. Pick if the subset sum < target & Not Pick otherwise.
+//If the required subset sum is achieved: Recursively call the function again to find another set of elements that yeilds target sum & pass the visited array as argument.
+//For each subset sum found decrease the subset counter (k).
+
+//TimeComplexity: O(2^(K+N))
+
+// We cannot call the function one after another (passing the visited), we have to get to the leaf node at once, as the order of choice make a difference whether the subsets can be formed or not.
+// Example: 2 3 4 1 1
+// Form two subsets of total sum value 5.
+// If we choose in first function call (3,1,1) another subset cannot be formed, the function will return false, which is incorrect.
+// Try all the possible combination.
+
+// NEW CODE:
+class Solution{
+private:
+    bool findsum(int index, int target, vector<int> &visited, vector<int> &A, int group){
+        int N = A.size();
+        if(index == N){
+            if(target == 0) return (group == 1) ? true : findsum(0, groupsum, visited, A, group - 1);
+            else return false;
+        }
+        
+        // Take:
+        bool take = false, ntake = false;
+        if(visited[index] != 1 && A[index] <= target){
+            visited[index] = 1;
+            take = findsum(index+1, target-A[index], visited, A, group);
+            visited[index] = 0;
+        } if(take == true) return true;
+        
+        // Not Take:
+        ntake = findsum(index+1, target, visited, A, group);
+        if(ntake == true) return true;
+        
+        return false;
+    }
+
+public:
+    int groupsum;
+    bool isKPartitionPossible(int given[], int N, int K){
+        vector<int> A(given, given + N);
+        int totalsum = 0;
+        for(int i=0; i<N; i++) totalsum += A[i];
+        if(totalsum % K != 0) return false;
+        else groupsum = totalsum/K;
+        
+        vector<int> visited(N, 0);
+        return findsum(0, groupsum, visited, A, K);
+    }
+};
+
 class Solution{
 public:
     //Aim is to find if there exists k distinct subsets each with sum equal to target with no repeating elements in different subsets.
