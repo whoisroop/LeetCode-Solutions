@@ -1,0 +1,22 @@
+Distinct subset sum can be generated using the concept of preserving current subsets + adding the new elements to all the subsets,
+Preserving subset sum & generating new subset sum with the new element can be achieved using bitset.
+0 0 0 0 1 : The bit positions represents subset sum values, current : 0 for subset {}
+For a new element e.g. 1, preserve the current subset sum & add the current value to all the exisiting subset sums, bitset = bitset | (bitset << value)
+Add value to the bitset by left shift, 0 0 0 1 0, preserve previous sum by OR 0 0 0 1 1: Subsets = {{}, {1}} the bits 1 & 0 are set.
+
+Total sum of all subsets = 2^(elements-1) * (Sum Of All Elements)
+Example: {1, 2, 3} : 2^(3-1) * (1 + 2 + 3) = 4 * 6 or 24,
+The bits of each position is set 2^(n-1) times for the set of values from 0 .. 2^n (not included).
+Using powerset theorem, all the subsets 0 .. 2^n - 1 each value will be selected exactly 2^(n-1) times.
+
+We can perform a greedy selection to get the target value when the array follows the given condition:
+A[0] + A[1] + .. A[i - 1] < A[i]
+Moving from right to left, if the element <= target then selecting the element is the optimal choice.
+As the value A[i] + some value = target, the A[i] part cannot be compensated by the left of the array even if we choose all the elements.
+
+MINIMUM NUMBER OF JUMPS:
+Create a range till where you can reach in the current iteration, and then move from current + 1 to next range & determine new range i.e. max & count the number of iterations needed.
+{(2),1,1,2,1} : 1st iteration the range is <= 0, the new range is : position 0 + jump 2 = 2
+{2, (1, 1), 2, 1} : 2nd iteration the range is [0+1, 2], the new max range is : position 2 + jump 1 = 3
+{2, 1, 1, (2), 1} : 3rd iteration the range is [2+1, 3], the new max range is : position 3 + jump 2 = 5 >= N, the end is reached.
+

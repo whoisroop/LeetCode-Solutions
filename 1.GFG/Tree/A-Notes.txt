@@ -1,0 +1,13 @@
+Some problems can be solved using BFS algorithms, the only missing thing is the link from child to parent, create a map to save the link from child to parent & solve the problem using GRAPH algorithms.
+Example :  
+Burning Tree https://practice.geeksforgeeks.org/problems/burning-tree/1?page=1&category[]=Tree&sortBy=submissions
+Nodes At Given Difference https://practice.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1?page=1&category[]=Tree&sortBy=submissions
+Root To Leaf Path Sum : SIMPLE BFS https://practice.geeksforgeeks.org/problems/root-to-leaf-paths-sum/1 
+
+The tree represented using array, the left child : 2*index + 1 & right child : 2*index + 2, 0 based indexing, the parent element : (index-1)/2
+
+The problem that requires L + (Current Pivot) + R type problems, return the values from Left & Right, check the conditions on current node, if satisfied, store the solution to a reference variable. The solution is achieved at a point (reference variable).
+Example: 
+Max Path Sum https://practice.geeksforgeeks.org/problems/maximum-path-sum/1?page=1&category[]=Tree&sortBy=submissions
+Lowest Common Ancestor https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1
+

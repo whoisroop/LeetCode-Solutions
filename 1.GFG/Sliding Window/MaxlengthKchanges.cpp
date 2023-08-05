@@ -46,6 +46,33 @@ public:
 	}
 };
 
+// Problem Statement - 
+// Link - https://practice.geeksforgeeks.org/problems/maximum-consecutive-ones/1
+// You are given array nums of n length and an integer k .return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+
+class Solution {
+  public:
+    int longestOnes(int N, vector<int> &A, int K) {
+        int i=0, j=0;
+        int zeros = 0;
+        
+        int maxsize = 0;
+        while(j < N){
+            if(A[j] == 0) zeros += 1;
+            
+            if(zeros <= K) maxsize = max(maxsize, (j-i+1));
+            else{ 
+                if(A[i] == 0) zeros -= 1; 
+                i += 1; 
+            }
+            
+            j += 1;
+        }
+        
+        return maxsize;
+    }
+};
+
 int main(){
     Solution solve;
     
