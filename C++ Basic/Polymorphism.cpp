@@ -40,7 +40,7 @@ public:
     void print(){
         cout << p << " + " << q << "i" << endl;
     }
-
+    
     Z operator+(Z const &next){
         Z result(0, 0);
 
